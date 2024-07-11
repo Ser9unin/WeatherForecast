@@ -1,0 +1,47 @@
+version: '3.9'
+services:
+  psql:
+    image: postgres:16.3-alpine3.20
+    container_name: WEATHER_PSQL
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: weatherdb
+    volumes: 
+    - ./pkg/db/migrations/:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U dev -d weatherdb"]
+      interval: 5s
+      timeout: 2s
+      retries: 2
+    networks:
+      - fullstack
+
+  app:
+    image: golang:1.21.12-alpine3.20
+    volumes:
+      - ./:/app
+    container_name: WEATHER_API
+    ports:
+      - 8000:8000
+    environment:
+      - POSTGRES_HOST_ADDRESS=WEATHER_PSQL
+      - POSTGRES_HOST_PORT=5432
+      - POSTGRES_USER=dev
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=weatherdb
+      - SSL_MODE=disable
+      - SERVER_PORT=8000
+      - OPENWEATHERAPI_ID=0aaa713f22529504b6659560d42ada20
+    depends_on:
+      psql:
+        condition: service_healthy
+    entrypoint: /app/app.sh
+    networks:
+      - fullstack
+    
+networks:
+  fullstack:
+      driver: bridge
