@@ -233,9 +233,9 @@ func parseFcastOnTime(date int64, fcOnNearestTime []repository.FullFcastByTimeRo
 	fcNearestTimeUnix := fcOnNearestTime[0].Date
 
 	if date < fcNearestTimeUnix || date > fcNearestTimeUnix {
-		fcastOnTime.Temperature = int(nearestTemp)
+		fcastOnTime.Temperature = int(nearestTemp) - 273
 	} else {
-		fcastOnTime.Temperature = int((nearestTemp + secondTemp) / 2)
+		fcastOnTime.Temperature = int((nearestTemp+secondTemp)/2) - 273
 	}
 
 	return fcastOnTime, nil
