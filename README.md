@@ -80,7 +80,7 @@ http://localhost:8000/get_full_forecast?city_id={ID}&date={date}
 ```json
 {
     "Date":"2024-07-11T12:00:00Z",
-    "Temperature":300,"Forecast":{
+    "Temperature":27,"Forecast":{
         "Temp":300.24,
         "Date":1720710000,
         "ForecastData":{
