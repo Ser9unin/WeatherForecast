@@ -81,8 +81,6 @@ http://localhost:8000/get_short_forecast?city_id={ID}
 
 http://localhost:8000/get_full_forecast?city_id={ID}&date={date}
 
-по умолчанию температура 
-
 ответ на запрос
 ```json
 {
