@@ -9,8 +9,8 @@
 
 # Для запуска проекта
 ```bash
-        git clone https://github.com/Ser9unin/Weather
-        cd ./Weather
+        git clone https://github.com/Ser9unin/WeatherForecast
+        cd ./WeatherForecast
 ```        
 заменить ключ `OPENWEATHERAPI_ID` в файле `docker-compose.yml` на Ваш ключ к Openweather
 
